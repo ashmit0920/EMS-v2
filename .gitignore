@@ -1,0 +1,4 @@
+djongo/
+attendees/__pycache__/
+Event_Management_Django/__pycache__/
+.env
