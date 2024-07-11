@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify Attendee</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/verify.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Verify Attendee</h1>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="qr_code_data" placeholder="Scan QR code here">
+            <input type="submit" value="Verify">
+        </form>
+    </div>
+</body>
+</html>
