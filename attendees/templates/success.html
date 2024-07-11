@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Success</title>
+    <title>Registration Successful</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/success.css' %}">
 </head>
 <body>
     <div class="container">
         <h1>Registration Successful</h1>
-        <p>Your registration has been successfully completed.</p>
-        <a href="{% url 'register' %}">Register another attendee</a>
+        <p>Thank you for registering!</p>
+        <p>Your unique QR code:</p>
+        <img src="{% url 'get_qr_code' attendee_id %}" alt="QR Code">
+        <p>Please save this QR code as it would be used for verification purposes at the event.</p>
     </div>
 </body>
 </html>

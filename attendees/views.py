@@ -41,14 +41,14 @@ def register_attendee(request):
             # Saving the QR in database
             db.attendees.update_one({'_id': attendee_id}, {'$set': {'qr_code': qr_code_img}})
 
-            return redirect('success')  # Redirect to success page
+            return redirect('success', attendee_id=str(attendee_id))  # Redirect to success page
     else:
         form = AttendeeForm()
 
     return render(request, 'register.html', {'form': form})
 
-def success(request):
-    return render(request, 'success.html')
+def success(request, attendee_id):
+    return render(request, 'success.html', {'attendee_id': attendee_id})
 
 def verify_qr(request):
     if request.method == 'POST':
@@ -68,4 +68,14 @@ def verify_qr(request):
             except Exception as e:
                 message = "Error, please contact Ashmit or try again."
     
-    return render(request, 'verify.html', {'message': message})
+    return render(request, 'verify.html', {'message': message if message else None})
+
+def view_qr(request, attendee_id):
+    db = get_db()
+    attendee = db.attendees.find_one({'_id': ObjectId(attendee_id)})
+    
+    if attendee and 'qr_code' in attendee:
+        qr_code_img = attendee['qr_code']
+        return HttpResponse(qr_code_img, content_type="image/png")
+    else:
+        return HttpResponse("QR code not found", status=404)
