@@ -17,8 +17,9 @@ def generate_qr(data):
     qr.add_data(data)
     qr.make(fit=True)
     img = qr.make_image()
-    buffer = io.BytesIO
+    buffer = io.BytesIO()
     img.save(buffer, format="PNG")
+    # buffer.seek(0) -> optional, rewind the buffer to the beginning in case of errors
     return buffer.getvalue()
 
 def register_attendee(request):
