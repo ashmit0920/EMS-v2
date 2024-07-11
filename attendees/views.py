@@ -13,8 +13,8 @@ def register_attendee(request):
             }
             db = get_db()
             db.attendees.insert_one(attendee_data)
-            
-            return redirect('success')  # Redirect to a success page or another page
+
+            return redirect('success')  # Redirect to a success page
     else:
         form = AttendeeForm()
     return render(request, 'register.html', {'form': form})

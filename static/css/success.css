@@ -1,0 +1,35 @@
+body {
+    background-color: #1e1e2e;
+    color: #c9d1d9;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #2e2e3e;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-top: 50px;
+    text-align: center;
+}
+
+h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #007acc;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #005999;
+}
