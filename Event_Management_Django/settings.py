@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import load_dotenv
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djongo',
     'attendees',
 ]
 
@@ -76,18 +75,23 @@ WSGI_APPLICATION = 'Event_Management_Django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-load_dotenv()
-CONN_STR = os.getenv("CONN_STR")
+# load_dotenv()
+# CONN_STR = os.getenv("CONN_STR")
+# MONGO_PWD = os.getenv("MONGO_PWD")
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'attendees',
         'CLIENT': {
-            'host': CONN_STR
+            'host': CONN_STR,
+            'username': 'ashmitthawait2',
+            'password': MONGO_PWD,
         }
     }
 }
+"""
 
 
 # Password validation

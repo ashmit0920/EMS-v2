@@ -1,7 +1,6 @@
 from django import forms
-from .models import Attendee
 
-class AttendeeForm(forms.ModelForm):
-    class Meta:
-        model = Attendee
-        fields = ['name', 'email', 'phone']
+class AttendeeForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    phone = forms.CharField(max_length=15)

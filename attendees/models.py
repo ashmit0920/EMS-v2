@@ -1,3 +1,4 @@
+# Deprecated file, switched to PyMongo instead of Djongo
 from django.db import models
 
 class Attendee(models.Model):
