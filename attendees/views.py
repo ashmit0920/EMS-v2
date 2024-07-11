@@ -51,6 +51,7 @@ def success(request, attendee_id):
     return render(request, 'success.html', {'attendee_id': attendee_id})
 
 def verify_qr(request):
+    message = None
     if request.method == 'POST':
         qr_code_data = request.POST.get('qr_code_data')
 
@@ -68,7 +69,7 @@ def verify_qr(request):
             except Exception as e:
                 message = "Error, please contact Ashmit or try again."
     
-    return render(request, 'verify.html', {'message': message if message else None})
+    return render(request, 'verify.html', {'message': message})
 
 def view_qr(request, attendee_id):
     db = get_db()
