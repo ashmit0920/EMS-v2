@@ -13,6 +13,11 @@
             <input type="text" name="qr_code_data" placeholder="Scan QR code here">
             <input type="submit" value="Verify">
         </form>
+        {% if message %}
+            <div class="message {% if 'Verified' in message %} verified {% else %} not-verified {% endif %}">
+                {{message}}
+            </div>
+        {% endif %}
     </div>
 </body>
 </html>

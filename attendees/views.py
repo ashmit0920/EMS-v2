@@ -60,12 +60,12 @@ def verify_qr(request):
                 attendee = db.attendees.find_one({'_id': ObjectId(qr_code_data)})
                 
                 if attendee:
-                    return HttpResponse("Verified: " + attendee['name'])
+                    message = f"Verified: {attendee['name']}"
                 
                 else:
-                    return HttpResponse("Not Verified")
+                    message = "Verification failed"
             
             except Exception as e:
-                return HttpResponse("Invalid QR code")
+                message = "Error, please contact Ashmit or try again."
     
-    return render(request, 'verify.html')
+    return render(request, 'verify.html', {'message': message})

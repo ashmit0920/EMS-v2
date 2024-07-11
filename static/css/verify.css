@@ -53,3 +53,20 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
     background-color: #005999;
 }
+
+.message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+.verified {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+.not-verified {
+    background-color: #dc3545;
+    color: #ffffff;
+}
