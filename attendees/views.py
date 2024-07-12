@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import AttendeeForm
-from .utils import get_db
+from .utils import get_db, send_otp
 from bson.objectid import ObjectId
 import qrcode
 import io
@@ -80,3 +80,13 @@ def view_qr(request, attendee_id):
         return HttpResponse(qr_code_img, content_type="image/png")
     else:
         return HttpResponse("QR code not found", status=404)
+
+def login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            send_otp(email)
+            return render(request, 'login.html', {'message': 'OTP sent successfully', 'message_class': 'success'})
+        except Exception as e:
+            return render(request, 'login.html', {'message': 'Error sending OTP', 'message_class': 'error'})
+    return render(request, 'login.html')

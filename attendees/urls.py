@@ -5,5 +5,6 @@ urlpatterns = [
     path('register/', views.register_attendee, name='register'),
     path('success/<str:attendee_id>', views.success, name='success'),
     path('verify/', views.verify_qr, name='verify'),
-    path('qr_code/<str:attendee_id>/', views.view_qr, name='get_qr_code')
+    path('qr_code/<str:attendee_id>/', views.view_qr, name='get_qr_code'),
+    path('login/', views.login, name='login'),
 ]
