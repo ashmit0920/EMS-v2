@@ -1,5 +1,5 @@
 body {
-    background-color: #1e1e2e;
+    background-color: #1e1e1e;
     color: #c9d1d9;
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -16,6 +16,10 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     margin-top: 50px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -41,6 +45,7 @@ form input[type="text"] {
 
 form input[type="submit"] {
     padding: 10px;
+    margin-top: 15px;
     border: none;
     border-radius: 4px;
     background-color: #007acc;
@@ -63,10 +68,10 @@ form input[type="submit"]:hover {
 
 .verified {
     background-color: #28a745;
-    color: #ffffff;
+    color: white;
 }
 
 .not-verified {
     background-color: #dc3545;
-    color: #ffffff;
+    color: white;
 }

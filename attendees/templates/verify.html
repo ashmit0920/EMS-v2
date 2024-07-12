@@ -4,13 +4,16 @@
     <title>Verify Attendee</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/verify.css' %}">
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 </head>
 <body>
     <div class="container">
         <h1>Verify Attendee</h1>
+        <div id="qr-reader" style="width: 300px;"></div>
+
         <form method="post">
             {% csrf_token %}
-            <input type="text" name="qr_code_data" placeholder="Scan QR code here">
+            <input type="hidden" id="qr_code_data" name="qr_code_data">
             <input type="submit" value="Verify">
         </form>
         {% if message %}
@@ -19,5 +22,18 @@
             </div>
         {% endif %}
     </div>
+
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+            document.getElementById('qr_code_data').value = decodedText;
+        }
+
+        function onScanFailure(error) {
+            console.warn(`QR Error: ${error}`)
+        }
+
+        let qrCodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
+        qrCodeScanner.render(onScanSuccess, onScanFailure);
+    </script>
 </body>
 </html>
