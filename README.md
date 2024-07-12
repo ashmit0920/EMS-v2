@@ -7,8 +7,8 @@
 - [x] Show the qr to the user after conversion
 - [x] Handle qr codes in-memory (no file I/O) for efficieny and speed
 - [x] Make a front end
-- [ ] Admin panel to verify qr (almost done)
+- [x] Admin panel to scan and verify qr
 - [ ] Email qr to attendees, while handling images in-memory
-- [ ] Login feature to view qr again
-- [ ] Better ui/ux
+- [x] Login page with OTP authentication (otp input remaining)
 - [ ] Show remaining seats/spots
+- [ ] Better UI/UX
