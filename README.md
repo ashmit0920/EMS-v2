@@ -1,5 +1,7 @@
 # Event Management System
 
+Built on MVC architecture based on Django
+
 ### Tasks under developement
 
 - [x] Configure MongoDB Atlas with Django
