@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.core.cache import cache
 from .forms import AttendeeForm
 from .utils import get_db, send_otp
 from bson.objectid import ObjectId
@@ -84,9 +85,33 @@ def view_qr(request, attendee_id):
 def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-        try:
-            send_otp(email)
-            return render(request, 'login.html', {'message': 'OTP sent successfully', 'message_class': 'success'})
-        except Exception as e:
-            return render(request, 'login.html', {'message': 'Error sending OTP', 'message_class': 'error'})
+        db = get_db()
+        attendee = db.attendees.find_one({'email': email})
+        if attendee:
+            if 'otp' in request.POST:
+                entered_otp = request.POST.get('otp')
+                cached_otp = str(cache.get(email))
+                print(entered_otp, cached_otp)
+
+                if cached_otp == entered_otp: # OTP is correct
+                    qr_code_data = attendee.get('qr_code')
+                    return render(request, 'login.html', {
+                        'message': 'Logged in successfully', 
+                        'message_class': 'success', 
+                        'qr_code_data': qr_code_data
+                    })
+
+                else: # OTP is incorrect
+                    return render(request, 'login.html', {'message': 'Invalid OTP', 'message_class': 'error', 'email': email})
+            
+            else: # If otp is not in post, send it
+                try:
+                    otp = send_otp(email)
+                    cache.set(email, otp, timeout=300) # Cache OTP for 5 minutes
+                    return render(request, 'login.html', {'message': 'OTP sent successfully', 'message_class': 'success', 'email': email})
+                except Exception as e:
+                    return render(request, 'login.html', {'message': 'Error sending OTP', 'message_class': 'error'})
+        else:
+            return render(request, 'login.html', {'message': 'Email ID not found, please Register before logging in.', 'message_class': 'error'})
+    
     return render(request, 'login.html')
